@@ -3,23 +3,32 @@ package com.drops.admobexample
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import com.adcolony.sdk.AdColony
+import com.adcolony.sdk.AdColonyAppOptions
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.adcolony.sdk.AdColonyInterstitial
+import com.adcolony.sdk.AdColonyInterstitialListener
+
 
 class MainActivity : AppCompatActivity() {
-    lateinit var banner : AdView
+    private lateinit var banner : AdView
+    private lateinit var adColonyInterstitialListener: AdColonyInterstitialListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initAds()
-        confAdsCallbacks()
+        initAdMob()
+        confAdMobCallbacks()
+
+        initAdColony()
     }
 
-    private fun initAds() {
+    private fun initAdMob() {
         MobileAds.initialize(this, getString(R.string.admob_id))
 
         banner = findViewById(R.id.banner)
@@ -30,7 +39,34 @@ class MainActivity : AppCompatActivity() {
         banner.loadAd(adRequest)
     }
 
-    private fun confAdsCallbacks() {
+    private fun initAdColony() {
+        val options = AdColonyAppOptions()
+        options.keepScreenOn = true
+        options.gdprRequired = true
+        options.gdprConsentString = "1"
+
+        AdColony.configure(
+            this,
+            options,
+            getString(R.string.adcolony_id),
+            getString(R.string.adcolony_zone_interstitial_test))
+
+        AdColony.setAppOptions(options)
+
+        adColonyInterstitialListener = object : AdColonyInterstitialListener() {
+            override fun onRequestFilled(ad: AdColonyInterstitial) {
+                ad.show()
+            }
+        }
+    }
+
+    fun showInterstitial(v: View) {
+        AdColony.requestInterstitial(
+            getString(R.string.adcolony_zone_interstitial_test),
+            adColonyInterstitialListener)
+    }
+
+    private fun confAdMobCallbacks() {
         banner.adListener = object: AdListener() {
             override fun onAdLoaded() {
                 Log.d("ads", "onAdLoaded")

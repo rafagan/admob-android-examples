@@ -12,8 +12,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file('../test.keystore')
+            storePassword 'abcd@1234'
+            keyAlias 'test'
+            keyPassword 'abcd@1234'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -38,6 +49,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-ads:17.2.0'
 
+    // Mediation
+    implementation 'com.adcolony:sdk:3.3.8'
 }
 
 apply plugin: 'com.google.gms.google-services'
