@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity() {
         MobileAds.initialize(this, getString(R.string.admob_id))
 
         banner = findViewById(R.id.banner)
-        val adRequest = AdRequest.Builder().build()
+        val adRequest = AdRequest.Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+            .addTestDevice("810C89CA50E405EFB0CF693F49E40558")
+            .build()
         banner.loadAd(adRequest)
     }
 
@@ -34,7 +37,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAdFailedToLoad(errorCode : Int) {
-                Log.d("ads", "onAdFailedToLoad")
+                val errorType = when(errorCode) {
+                    AdRequest.ERROR_CODE_INTERNAL_ERROR -> "ERROR_CODE_INTERNAL_ERROR"
+                    AdRequest.ERROR_CODE_INVALID_REQUEST -> "ERROR_CODE_INVALID_REQUEST"
+                    AdRequest.ERROR_CODE_NETWORK_ERROR -> "ERROR_CODE_NETWORK_ERROR"
+                    AdRequest.ERROR_CODE_NO_FILL -> "ERROR_CODE_NO_FILL"
+                    else -> "Erro desconhecido"
+                }
+                Log.d("ads", "onAdFailedToLoad: $errorType")
             }
 
             override fun onAdOpened() {

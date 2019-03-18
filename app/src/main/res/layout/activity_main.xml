@@ -8,10 +8,14 @@
                 android:paddingBottom="10dp"
                 tools:context=".MainActivity">
 
-    <TextView android:text="@string/app_name"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content" />
-
+    <!--
+        BANNER
+        LARGE_BANNER
+        MEDIUM_RECTANGLE
+        FULL_BANNER
+        LEADERBOARD
+        SMART_BANNER
+    -->
     <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner"
@@ -20,7 +24,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_test_id">
+            ads:adUnitId="@string/banner_id">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
