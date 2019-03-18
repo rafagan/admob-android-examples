@@ -3,7 +3,12 @@
     <string name="admob_id">ca-app-pub-3810785485979028~6903883498</string>
     <string name="banner_id">ca-app-pub-3810785485979028/2139653730</string>
     <string name="banner_id_test">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_id">ca-app-pub-3810785485979028/5538954641</string>
+    <string name="interstitial_id_test">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="rewarded_id">ca-app-pub-3810785485979028/4772667884</string>
+    <string name="rewarded_id_test">ca-app-pub-3940256099942544/1234567890</string>
 
     <string name="adcolony_id">app35b5fc7ae0e5447e8f</string>
     <string name="adcolony_zone_interstitial_test">vzd0311f293dd145a097</string>
+    <string name="adcolony_zone_interstitial">vzcf7d2f200056435492</string>
 </resources>
